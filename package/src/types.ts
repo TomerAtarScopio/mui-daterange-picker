@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 export interface DateRange {
   startDate?: Date;
@@ -21,3 +21,8 @@ export type DefinedRange = {
   endDate: Date;
   label: string;
 };
+
+export type DateRangePickerMessages = {
+  endDate: ReactNode;
+  startDate: ReactNode;
+}

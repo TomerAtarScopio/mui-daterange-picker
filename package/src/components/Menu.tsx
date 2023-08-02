@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 import React from 'react';
 import { Divider, Grid, Paper, Typography } from '@mui/material';
-import {differenceInCalendarMonths, format} from 'date-fns';
+import { differenceInCalendarMonths, format } from 'date-fns';
 import ArrowRightAlt from '@mui/icons-material/ArrowRightAlt';
 import Month from './Month';
 import DefinedRanges from './DefinedRanges';
@@ -10,6 +10,7 @@ import {
   DefinedRange,
   Setter,
   NavigationAction,
+  DateRangePickerMessages,
 } from '../types';
 import { MARKERS } from './Markers';
 
@@ -36,6 +37,7 @@ interface MenuProps {
     onMonthNavigate: (marker: symbol, action: NavigationAction) => void;
   };
   locale?: Locale;
+  messages: DateRangePickerMessages;
 }
 
 const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
@@ -51,7 +53,8 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
     setDateRange,
     helpers,
     handlers,
-    locale
+    locale,
+    messages,
   } = props;
 
   const { startDate, endDate } = dateRange;
@@ -61,7 +64,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
   };
   return (
     <Paper elevation={5} square>
-      <Grid container direction="row" wrap="nowrap">
+      <Grid container direction="row" wrap="nowrap" className="Menu-Content">
         <Grid>
           <DefinedRanges
             selectedRange={dateRange}
@@ -69,20 +72,20 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
             setRange={setDateRange}
           />
         </Grid>
-        <Divider orientation="vertical" flexItem/>
+        <Divider orientation="vertical" flexItem />
         <Grid>
           <Grid container sx={{ padding: '20px 70px' }} alignItems="center">
-            <Grid item sx={{ flex: 1, textAlign: 'center' }}>
+            <Grid item sx={{ flex: 1, textAlign: 'center' }} className="Menu-StartDate">
               <Typography variant="subtitle1">
-                {startDate ? format(startDate, 'dd MMMM yyyy', {locale}) : 'Start Date'}
+                {startDate ? format(startDate, 'dd MMMM yyyy', { locale }) : messages.startDate}
               </Typography>
             </Grid>
-            <Grid item sx={{ flex: 1, textAlign: 'center' }}>
+            <Grid item sx={{ flex: 1, textAlign: 'center' }} className="Menu-Arrow">
               <ArrowRightAlt color="action" />
             </Grid>
-            <Grid item sx={{ flex: 1, textAlign: 'center' }}>
+            <Grid item sx={{ flex: 1, textAlign: 'center' }} className="Menu-EndDate">
               <Typography variant="subtitle1">
-                {endDate ? format(endDate, 'dd MMMM yyyy', {locale}) : 'End Date'}
+                {endDate ? format(endDate, 'dd MMMM yyyy', { locale }) : messages.endDate}
               </Typography>
             </Grid>
           </Grid>
@@ -96,7 +99,7 @@ const Menu: React.FunctionComponent<MenuProps> = (props: MenuProps) => {
               marker={MARKERS.FIRST_MONTH}
               locale={locale}
             />
-            <Divider orientation="vertical" flexItem/>
+            <Divider orientation="vertical" flexItem />
             <Month
               {...commonProps}
               value={secondMonth}

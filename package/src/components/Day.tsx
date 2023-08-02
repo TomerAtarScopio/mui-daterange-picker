@@ -25,6 +25,15 @@ const Day: React.FunctionComponent<DayProps> = ({
   value,
 }: DayProps) => {
 
+  const className = [
+    filled && 'filled',
+    disabled && 'disabled',
+    highlighted && 'highlighted',
+    outlined && 'outlined',
+    startOfRange && 'startOfRange',
+    endOfRange && 'endOfRange',
+  ].filter(Boolean).map(c => `Day-${c}`).join(" ");
+
   return (
     <Box
       sx={{
@@ -33,6 +42,8 @@ const Day: React.FunctionComponent<DayProps> = ({
         borderRadius: startOfRange ? '50% 0 0 50%' : endOfRange ? '0 50% 50% 0' : undefined,
         backgroundColor: (theme) => !disabled && highlighted ? theme.palette.primary.light : undefined,
       }}
+
+      className={className}
     >
       <IconButton
         sx={{
@@ -50,7 +61,7 @@ const Day: React.FunctionComponent<DayProps> = ({
         disabled={disabled}
         onClick={onClick}
         onMouseOver={onHover}
-        // size="large"
+      // size="large"
       >
         <Typography
           sx={{
