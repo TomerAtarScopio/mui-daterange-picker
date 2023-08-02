@@ -16,7 +16,7 @@ export interface DateRangePickerWrapperProps {
   // eslint-disable-next-line no-unused-vars
   onChange: (dateRange: DateRange) => void;
   closeOnClickOutside?: boolean;
-  wrapperClassName?: string;
+  className?: string;
   locale?: Locale;
   messages?: DateRangePickerMessages;
 }
@@ -26,7 +26,7 @@ const DateRangePickerWrapper: React.FunctionComponent<DateRangePickerWrapperProp
 ) => {
   const {
     closeOnClickOutside,
-    wrapperClassName,
+    className: wrapperClassName,
     toggle,
     open,
   } = props;
